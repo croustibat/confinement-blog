@@ -48,7 +48,7 @@ import { fr } from 'date-fns/locale'
 export default {
   async asyncData({ params }) {
     const data = await request({
-      preview: true,
+      preview: false,
       query: gql`
         {
           site: _site {
