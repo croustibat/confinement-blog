@@ -6,6 +6,6 @@
   "deploymentType": "static",
   "buildCommand": "npm run generate",
   "buildDirectory": "dist",
-  "datocmsApiTokenEnvName": "NUXT_ENV_DATOCMS_API_TOKEN",
-  "livePreviewUrl": "https://datocms-nuxtjs-demo.netlify.com"
+  "datocmsApiTokenEnvName": "41dc0737d5b2b71ca42a9c4b2f6eeb",
+  "livePreviewUrl": "https://blog-confinement.now.sh"
 }

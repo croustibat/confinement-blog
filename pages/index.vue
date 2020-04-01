@@ -35,74 +35,6 @@
         </div>
       </div>
     </section>
-
-    <!-- newsletter -->
-    <section class="section">
-      <div class="columns">
-        <div class="column is-10 is-offset-1">
-          <div class="container has-text-centered is-fluid">
-            <div class="hero is-light">
-              <div class="hero-body">
-                <h2 class="title is-4">Sign up for our newsletter</h2>
-                <div class="column is-6 is-offset-3">
-                  <div class="field has-addons has-addons-centered">
-                    <div class="control is-expanded">
-                      <input
-                        class="input"
-                        type="text"
-                        placeholder="Email address"
-                      />
-                    </div>
-                    <div class="control">
-                      <a class="button is-info">
-                        Subscribe
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Articles -->
-
-    <section class="hero ">
-      <div class="hero-body">
-        <div class="container">
-          <div
-            v-for="group in Math.ceil((posts.length - 2) / 2)"
-            v-bind:key="group"
-          >
-            <section class="section">
-              <div class="columns is-variable is-8">
-                <div
-                  v-for="(post, index) in posts.slice(group * 2, group * 2 + 2)"
-                  v-bind:key="post.slug"
-                  :class="['column is-5', index === 0 && 'is-offset-1']"
-                >
-                  <div class="content is-medium">
-                    <h2 class="subtitle is-5 has-text-grey">
-                      {{ formatDate(post.publicationDate) }}
-                    </h2>
-                    <h1 class="title has-text-black is-3">
-                      <nuxt-link :to="`/posts/${post.slug}`">{{
-                        post.title
-                      }}</nuxt-link>
-                    </h1>
-                    <div class="has-text-dark" v-html="post.excerpt" />
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <div class="is-divider" />
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
@@ -111,10 +43,12 @@ import { request, gql, imageFields, seoMetaTagsFields } from '~/lib/datocms'
 import { toHead } from 'vue-datocms'
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
+import { fr } from 'date-fns/locale'
 
 export default {
   async asyncData({ params }) {
     const data = await request({
+      preview: true,
       query: gql`
         {
           site: _site {
@@ -154,7 +88,8 @@ export default {
   },
   methods: {
     formatDate(date) {
-      return format(parseISO(date), 'PPP')
+      if (!date) return
+      return format(parseISO(date), 'PPP', { locale: fr })
     }
   },
   head() {

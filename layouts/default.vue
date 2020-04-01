@@ -4,7 +4,7 @@
       <div class="container">
         <div class="navbar-brand">
           <nuxt-link class="navbar-item" to="/">
-            <img src="/bulma.png" alt="Logo" />
+            Blog du confinement
           </nuxt-link>
           <span class="navbar-burger burger" v-on:click="toggleNavbar">
             <span></span>
@@ -14,7 +14,10 @@
         </div>
         <div :class="['navbar-menu', navbarOpen && 'is-active']">
           <div class="navbar-end">
-            <nuxt-link class="navbar-item is-active is-size-5 has-text-weight-semibold" to="/">
+            <nuxt-link
+              class="navbar-item is-active is-size-5 has-text-weight-semibold"
+              to="/"
+            >
               Home
             </nuxt-link>
           </div>
