@@ -3,12 +3,15 @@
 
 $text: $white;
 $link: $white;
-
+$h2: $white;
 @import '~bulma';
 
 body {
   background-color: $black-bis;
 }
 .navbar {
+  background-color: $black-bis;
+}
+.footer {
   background-color: $black-bis;
 }

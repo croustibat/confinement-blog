@@ -3,35 +3,31 @@
     <section class="hero">
       <div class="hero-body">
         <div class="container">
-          <div v-for="post in posts.slice(0, 2)" v-bind:key="post.slug">
-            <div class="columns">
-              <div class="column is-8 is-offset-2">
-                <figure class="image">
-                  <datocms-image :data="post.coverImage.responsiveImage" />
-                </figure>
-              </div>
-            </div>
-
-            <section class="section">
-              <div class="columns">
-                <div class="column is-8 is-offset-2">
-                  <div class="content is-medium">
-                    <h2 class="subtitle is-4">
-                      {{ formatDate(post.publicationDate) }}
-                    </h2>
-                    <h1 class="title">
-                      <nuxt-link :to="`/posts/${post.slug}`">{{
-                        post.title
-                      }}</nuxt-link>
-                    </h1>
-                    <div v-html="post.excerpt" />
-                  </div>
+          <section
+            data-section-id="3"
+            data-component-id="29e6_17_02_awz"
+            data-category="gallery"
+            class="section"
+          >
+            <div class="container">
+              <h2 class="title has-text-centered" data-config-id="header">
+                Jour 1
+              </h2>
+              <div class="columns is-multiline" data-config-id="gallery_02">
+                <div
+                  v-for="post in posts"
+                  v-bind:key="post.slug"
+                  class="column is-4"
+                >
+                  <a href="#">
+                    <figure class="image">
+                      <datocms-image :data="post.coverImage.responsiveImage" />
+                    </figure>
+                  </a>
                 </div>
               </div>
-            </section>
-
-            <div class="is-divider" />
-          </div>
+            </div>
+          </section>
         </div>
       </div>
     </section>
@@ -61,19 +57,10 @@ export default {
             id
             title
             slug
-            publicationDate: _firstPublishedAt
-            excerpt
+
             coverImage {
               responsiveImage(imgixParams: { fit: crop, ar: "16:9", w: 860 }) {
                 ...imageFields
-              }
-            }
-            author {
-              name
-              picture {
-                responsiveImage(imgixParams: { fit: crop, ar: "1:1", w: 40 }) {
-                  ...imageFields
-                }
               }
             }
           }
