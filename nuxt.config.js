@@ -35,13 +35,25 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    // Doc https://github.com/Developmint/nuxt-webfontloader
+    'nuxt-webfontloader'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+
+  /*
+   ** check doc https://github.com/Developmint/nuxt-webfontloader#adding-google-fonts-with-font-display-option
+   */
+  webfontloader: {
+    google: {
+      // Loads Open Sans font with weights 300 and 400 + display font as swap
+      families: ['Rubik&:300,400,600&display=swap']
+    }
+  },
   /*
    ** Build configuration
    */

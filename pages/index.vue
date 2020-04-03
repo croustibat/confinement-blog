@@ -3,27 +3,32 @@
     <section class="hero">
       <div class="hero-body">
         <div class="container">
-          <section
-            data-section-id="3"
-            data-component-id="29e6_17_02_awz"
-            data-category="gallery"
-            class="section"
-          >
+          <section class="section">
             <div class="container">
-              <h2 class="title has-text-centered" data-config-id="header">
-                Jour 1
-              </h2>
-              <div class="columns is-multiline" data-config-id="gallery_02">
+              <div class="columns is-multiline gallery">
                 <div
                   v-for="post in posts"
                   v-bind:key="post.slug"
                   class="column is-4"
                 >
-                  <a href="#">
-                    <figure class="image">
-                      <datocms-image :data="post.coverImage.responsiveImage" />
-                    </figure>
-                  </a>
+                  <div class="card">
+                    <div class="card-image">
+                      <figure class="image">
+                        <datocms-image
+                          :data="post.coverImage.responsiveImage"
+                          pictureClass="my_image"
+                        />
+                      </figure>
+                      <div class="card-content is-overlay is-clipped">
+                        <a
+                          :href="post.coverImage.url"
+                          :data-caption="post.coverImage.alt"
+                        >
+                          <span class="tag"> #{{ post.title }} </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -40,6 +45,7 @@ import { toHead } from 'vue-datocms'
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
 import { fr } from 'date-fns/locale'
+import baguetteBox from 'baguettebox.js'
 
 export default {
   async asyncData({ params }) {
@@ -53,13 +59,17 @@ export default {
             }
           }
 
-          posts: allPosts(first: 10, orderBy: _firstPublishedAt_DESC) {
+          posts: allPosts(first: 50, orderBy: date_ASC) {
             id
             title
             slug
 
             coverImage {
-              responsiveImage(imgixParams: { fit: crop, ar: "16:9", w: 860 }) {
+              url
+              alt
+              responsiveImage(
+                imgixParams: { fit: fillmax, ar: "16:9", w: 860 }
+              ) {
                 ...imageFields
               }
             }
@@ -85,6 +95,24 @@ export default {
     }
 
     return toHead(this.site.favicon)
+  },
+  mounted() {
+    baguetteBox.run('.gallery')
   }
 }
 </script>
+
+<style lang="scss">
+.card {
+  background-color: transparent;
+}
+.tag:not(body) {
+  background-color: transparent;
+  font-family: 'Rubik', sans-serif;
+  font-size: 3em;
+  position: absolute;
+  bottom: -10px;
+  left: 5px;
+  padding: 0;
+}
+</style>
