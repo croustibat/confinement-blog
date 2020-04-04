@@ -1,41 +1,29 @@
 <template>
-  <div>
-    <section class="hero">
-      <div class="hero-body">
-        <div class="container">
-          <section class="section">
-            <div class="container">
-              <div class="columns is-multiline gallery">
-                <div
-                  v-for="post in posts"
-                  v-bind:key="post.slug"
-                  class="column is-4"
-                >
-                  <div class="card">
-                    <div class="card-image">
-                      <figure class="image">
-                        <datocms-image
-                          :data="post.coverImage.responsiveImage"
-                          pictureClass="my_image"
-                        />
-                      </figure>
-                      <div class="card-content is-overlay is-clipped">
-                        <a
-                          :href="post.coverImage.url"
-                          :data-caption="post.coverImage.alt"
-                        >
-                          <span class="tag"> #{{ post.title }} </span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+  <div class="container">
+    <header>
+      <h1>#Restezchezvous</h1>
+    </header>
+    <div class="columns is-multiline gallery">
+      <div v-for="post in posts" v-bind:key="post.slug" class="column is-4">
+        <!-- <div class="card"> -->
+        <!-- <div class="card-image"> -->
+        <a
+          :href="post.coverImage.url"
+          :data-caption="post.title"
+          class="image_link"
+        >
+          <datocms-image
+            :data="post.coverImage.responsiveImage"
+            pictureClass="my_image"
+          />
+          <div class="card-content">
+            <span class="my_image_title"> #{{ post.title }} </span>
+          </div>
+        </a>
       </div>
-    </section>
+      <!-- </div> -->
+      <!-- </div> -->
+    </div>
   </div>
 </template>
 
@@ -73,6 +61,12 @@ export default {
                 ...imageFields
               }
             }
+
+            gallery {
+              id
+              alt
+              url
+            }
           }
         }
 
@@ -106,13 +100,65 @@ export default {
 .card {
   background-color: transparent;
 }
-.tag:not(body) {
-  background-color: transparent;
+.is-4 {
+  margin-bottom: 10px;
+  &:nth-child(1n) {
+    .my_image_title {
+      background-color: #fce54d;
+    }
+    &:hover {
+      .my_image_title {
+        animation: slide 1.3s forwards cubic-bezier(0.215, 0.61, 0.355, 1);
+        -webkit-animation: slide 1.3s forwards
+          cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+    }
+  }
+  &:nth-child(2n) {
+    .my_image_title {
+      background-color: #d53c9f;
+    }
+    &:hover {
+      .my_image_title {
+        animation-delay: 300ms;
+        animation: slide 1.3s forwards cubic-bezier(0.215, 0.61, 0.355, 1);
+        -webkit-animation: slide 1.3s forwards
+          cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+    }
+  }
+  &:nth-child(3n) {
+    .my_image_title {
+      background-color: #61c1f9;
+    }
+    &:hover {
+      .my_image_title {
+        animation-delay: 600ms;
+        animation: slide 1.3s forwards cubic-bezier(0.215, 0.61, 0.355, 1);
+        -webkit-animation: slide 1.3s forwards
+          cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+    }
+  }
+}
+.my_image_title {
   font-family: 'Rubik', sans-serif;
-  font-size: 3em;
+  font-size: 1.8em;
   position: absolute;
-  bottom: -10px;
-  left: 5px;
-  padding: 0;
+  bottom: 8px;
+  left: -10px;
+  padding: 5px 12px;
+  color: white;
+}
+.image_link {
+  position: relative;
+}
+@keyframes slide {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-8deg);
+  }
 }
 </style>

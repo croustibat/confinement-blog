@@ -7,11 +7,18 @@ $link: $white;
 $h2: $white;
 @import '~bulma';
 
+html,
 body {
   background-color: $black-bis;
 }
-.navbar {
-  background-color: $black-bis;
+.container {
+  margin-top: 2em;
+}
+h1 {
+  color: white;
+  font-size: 5em;
+  margin-bottom: 0.5em;
+  text-align: center;
 }
 .footer {
   background-color: $black-bis;
