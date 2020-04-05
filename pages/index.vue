@@ -5,8 +5,6 @@
     </header>
     <div class="columns is-multiline gallery">
       <div v-for="post in posts" v-bind:key="post.slug" class="column is-4">
-        <!-- <div class="card"> -->
-        <!-- <div class="card-image"> -->
         <a
           :href="post.coverImage.url"
           :data-caption="post.title"
@@ -16,13 +14,12 @@
             :data="post.coverImage.responsiveImage"
             pictureClass="my_image"
           />
+
           <div class="card-content">
             <span class="my_image_title"> #{{ post.title }} </span>
           </div>
         </a>
       </div>
-      <!-- </div> -->
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -61,15 +58,8 @@ export default {
                 ...imageFields
               }
             }
-
-            gallery {
-              id
-              alt
-              url
-            }
           }
         }
-
         ${imageFields}
         ${seoMetaTagsFields}
       `
