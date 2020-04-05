@@ -99,17 +99,17 @@ export default {
         },
         {
           hid: 'og-image',
-          property: 'og-image',
+          property: 'og:image',
           content: this.site.globalSeo.fallbackSeo.image.url
         },
         {
           hid: 'og-title',
-          property: 'og-title',
+          property: 'og:title',
           content: this.site.globalSeo.siteName
         },
         {
           hid: 'og-description',
-          property: 'og-description',
+          property: 'og:description',
           content: this.site.globalSeo.fallbackSeo.description
         }
       ]
