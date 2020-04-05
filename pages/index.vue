@@ -39,6 +39,17 @@ export default {
       query: gql`
         {
           site: _site {
+            globalSeo {
+              siteName
+              fallbackSeo {
+                description
+                title
+                twitterCard
+                image {
+                  url
+                }
+              }
+            }
             favicon: faviconMetaTags {
               ...seoMetaTagsFields
             }
@@ -78,7 +89,21 @@ export default {
       return
     }
 
-    return toHead(this.site.favicon)
+    return {
+      title: this.site.globalSeo.siteName,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.site.globalSeo.fallbackSeo.description
+        },
+        {
+          hid: 'og-image',
+          property: 'og-image',
+          content: this.site.globalSeo.fallbackSeo.image.url
+        }
+      ]
+    }
   },
   mounted() {
     baguetteBox.run('.gallery')
