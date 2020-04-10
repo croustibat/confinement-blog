@@ -55,7 +55,7 @@ export default {
             }
           }
 
-          posts: allPosts(first: 50, orderBy: date_ASC) {
+          posts: allPosts(first: 50, orderBy: date_DESC) {
             id
             title
             slug
